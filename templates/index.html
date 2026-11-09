@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <p class="eyebrow">MACHINE LEARNING PROJECT</p>
+            <h1>Customer Churn Prediction</h1>
+            <p>Estimate whether a customer may leave the service.</p>
+        </header>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <h2>Customer Information</h2>
+
+            <div class="form-grid">
+                <label>Gender
+                    <select name="gender" required>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                </label>
+
+                <label>Senior Citizen
+                    <select name="SeniorCitizen" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </label>
+
+                <label>Partner
+                    <select name="Partner" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </label>
+
+                <label>Dependents
+                    <select name="Dependents" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </label>
+
+                <label>Tenure (months)
+                    <input type="number" name="tenure"
+                           min="0" max="72" required>
+                </label>
+
+                <label>Phone Service
+                    <select name="PhoneService" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </label>
+
+                <label>Multiple Lines
+                    <select name="MultipleLines" required>
+                        <option>No</option>
+                        <option>Yes</option>
+                        <option>No phone service</option>
+                    </select>
+                </label>
+
+                <label>Internet Service
+                    <select name="InternetService" required>
+                        <option>DSL</option>
+                        <option>Fiber optic</option>
+                        <option>No</option>
+                    </select>
+                </label>
+
+                <label>Online Security
+                    <select name="OnlineSecurity" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>No internet service</option>
+                    </select>
+                </label>
+
+                <label>Online Backup
+                    <select name="OnlineBackup" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>No internet service</option>
+                    </select>
+                </label>
+
+                <label>Device Protection
+                    <select name="DeviceProtection" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>No internet service</option>
+                    </select>
+                </label>
+
+                <label>Tech Support
+                    <select name="TechSupport" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>No internet service</option>
+                    </select>
+                </label>
+
+                <label>Streaming TV
+                    <select name="StreamingTV" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>No internet service</option>
+                    </select>
+                </label>
+
+                <label>Streaming Movies
+                    <select name="StreamingMovies" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                        <option>No internet service</option>
+                    </select>
+                </label>
+
+                <label>Contract
+                    <select name="Contract" required>
+                        <option>Month-to-month</option>
+                        <option>One year</option>
+                        <option>Two year</option>
+                    </select>
+                </label>
+
+                <label>Paperless Billing
+                    <select name="PaperlessBilling" required>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </label>
+
+                <label>Payment Method
+                    <select name="PaymentMethod" required>
+                        <option>Electronic check</option>
+                        <option>Mailed check</option>
+                        <option>Bank transfer (automatic)</option>
+                        <option>Credit card (automatic)</option>
+                    </select>
+                </label>
+
+                <label>Monthly Charges
+                    <input type="number" name="MonthlyCharges"
+                           min="0" step="0.01" required>
+                </label>
+
+                <label>Total Charges
+                    <input type="number" name="TotalCharges"
+                           min="0" step="0.01" required>
+                </label>
+            </div>
+
+            <button type="submit">Predict Customer Churn</button>
+        </form>
+
+        {% if prediction %}
+            <section class="result">
+                <h2>{{ prediction }}</h2>
+                <p>Estimated churn probability</p>
+                <div class="probability">{{ "%.1f"|format(probability) }}%</div>
+                <p class="note">
+                    This is a model estimate, not a guarantee.
+                </p>
+            </section>
+        {% endif %}
+    </main>
+</body>
+</html>
